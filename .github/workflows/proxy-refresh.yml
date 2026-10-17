@@ -41,13 +41,15 @@ jobs:
           REFRESH_HOURS: "2"
 
       - name: Commit results
+        id: commit
         run: |
           git config user.name "proxy-bot"
           git config user.email "proxy-bot@users.noreply.github.com"
           git add proxies/http_raw.txt proxies/http_tested.txt proxies/portal_ok.txt proxies/sample.txt proxies/sources.json proxies/stats.json subscribers.json
-          git diff --cached --quiet && echo "no changes" && exit 0
+          git diff --cached --quiet && echo "no changes" && echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT" && exit 0
           git commit -m "proxy refresh $(date -u +%F_%T)"
           git push
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Purge CDN cache
         if: always()
@@ -62,4 +64,5 @@ jobs:
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          DATA_SHA: ${{ steps.commit.outputs.sha }}
         run: python notify.py
