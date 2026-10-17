@@ -1,6 +1,6 @@
 # Free Proxy Fetcher (GitHub Actions)
 
-VPS မလို — GitHub Actions အလကားသုံး။ ၆ နာရီတစ်ခါ public proxy list 18 ခုကနေ
+VPS မလို — GitHub Actions အလကားသုံး။ ၃ နာရီတစ်ခါ public proxy list 18 ခုကနေ
 ယူ → စစ် → repo ထဲ commit → Telegram ကို အကြောင်းကြား။
 
 ## အသုံးပြုပုံ (၅ မိနစ်)
@@ -30,7 +30,7 @@ VPS မလို — GitHub Actions အလကားသုံး။ ၆ နာရ
 
 ## ပြင်လို့ရတာတွေ
 
-- `.github/workflows/proxy-refresh.yml` ထဲ `cron: "0 */6 * * *"` = ၆ နာရီတစ်ခါ
+- `.github/workflows/proxy-refresh.yml` ထဲ `cron: "0 */3 * * *"` = ၃ နာရီတစ်ခါ
   (ဥပမာ ၂ နာရီတစ်ခါ → `0 */2 * * *`)
 - `TEST_PORTAL: "1"` → `"0"` ဆို portal stage မစစ်ဘူး (ပိုမြန်)
 - `fetch_proxies.py` → `SAMPLE_PER_SOURCE` (default 1000/source)
