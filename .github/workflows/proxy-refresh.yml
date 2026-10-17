@@ -6,7 +6,7 @@ name: proxy-refresh
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 */3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -72,8 +72,9 @@ jobs:
                   f"🧪 Tested: {s.get('candidates')} → ✅ Working: <b>{s.get('working')}</b>\n"
                   f"🎯 Portal OK: <b>{s.get('portal_ok')}</b>\n"
                   f"⚡ Fastest: {s.get('fastest_latency_s')}s\n\n"
-                  f"🔗 <code>https://cdn.jsdelivr.net/gh/{os.environ['GITHUB_REPOSITORY']}@main/proxies/http_tested.txt</code>"
               )
+              link = f"https://cdn.jsdelivr.net/gh/{os.environ['GITHUB_REPOSITORY']}@main/proxies/http_tested.txt"
+              msg += f'🔗 <a href="{link}">proxy list နှိပ်ဖွင့်</a>'
           except Exception as e:
               msg = f"⚠️ proxy refresh finished with errors: {e}"
           print(msg)
