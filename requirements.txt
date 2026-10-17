@@ -1,0 +1,2 @@
+aiohttp>=3.9
+brotli>=1.0  # lets aiohttp decode brotli (br) responses from jsdelivr/geonode
