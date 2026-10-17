@@ -47,7 +47,10 @@ def build_message(stats, repo):
     f = stats.get("fetch", {})
     per = f.get("per_source", {})
     alive = sum(1 for v in per.values() if v > 0)
-    link = f"https://cdn.jsdelivr.net/gh/{repo}@main/proxies/http_tested.txt"
+    # SHA-pinned link: immutable, so no CDN edge can ever serve a stale copy.
+    sha = os.environ.get("DATA_SHA", "").strip()
+    ver = f"@{sha}" if sha else "@main"
+    link = f"https://cdn.jsdelivr.net/gh/{repo}{ver}/proxies/http_tested.txt"
     return (
         "🔄 <b>Proxy refresh done</b>\n"
         f"🕐 {stats.get('timestamp')}\n"
