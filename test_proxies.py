@@ -83,15 +83,6 @@ def main():
     t1 = time.time()
     print(f"[test] stage1 working: {len(working)} in {t1 - t0:.1f}s", flush=True)
 
-    with open(os.path.join(out_dir, "http_tested.txt"), "w") as f:
-        now = time.time()
-        last_update = _ts(now)
-        next_update = _ts(now + REFRESH_HOURS * 3600)
-        f.write(f"# last_update {last_update}\n")
-        f.write(f"# next_update ~{next_update} every {REFRESH_HOURS:g}h\n")
-        f.write(f"# working {len(working)}\n")
-        f.write("\n".join(p for p, _ in working) + "\n")
-
     portal_ok, t2 = [], t1
     if TEST_PORTAL and working:
         top = [p for p, _ in working[:PORTAL_SAMPLE]]
@@ -103,6 +94,21 @@ def main():
         print(f"[test] stage2 portal ok: {len(portal_ok)} in {t2 - t1:.1f}s", flush=True)
         with open(os.path.join(out_dir, "portal_ok.txt"), "w") as f:
             f.write("\n".join(portal_ok) + "\n")
+
+    # main list: portal_ok section first, then the rest (all parser-safe headers)
+    with open(os.path.join(out_dir, "http_tested.txt"), "w") as f:
+        now = time.time()
+        f.write(f"# last_update {_ts(now)}\n")
+        f.write(f"# next_update ~{_ts(now + REFRESH_HOURS * 3600)} every {REFRESH_HOURS:g}h\n")
+        f.write(f"# working {len(working)} portal_ok {len(portal_ok)}\n")
+        if portal_ok:
+            ok_set = set(portal_ok)
+            f.write("# portal_ok\n")
+            f.write("\n".join(portal_ok) + "\n")
+            f.write("# tested_ok\n")
+            f.write("\n".join(p for p, _ in working if p not in ok_set) + "\n")
+        else:
+            f.write("\n".join(p for p, _ in working) + "\n")
 
     stats = {
         "timestamp": datetime.now(MMT).strftime("%Y-%m-%d %H:%M:%S +0630"),
