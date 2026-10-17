@@ -1,8 +1,9 @@
 name: proxy-refresh
 
-# Free proxy pipeline: fetch public lists -> test -> commit -> notify.
-# Runs every 6 hours and on demand. Each run commits, so the schedule
-# never goes idle (GitHub pauses schedules after 60 days of no activity).
+# Free proxy pipeline: fetch public lists -> test -> commit -> notify
+# subscribers (with day limits) -> purge CDN. Runs every 2 hours and on
+# demand. Each run commits, so the schedule never goes idle (GitHub pauses
+# schedules after 60 days of no activity).
 
 on:
   schedule:
@@ -43,7 +44,7 @@ jobs:
         run: |
           git config user.name "proxy-bot"
           git config user.email "proxy-bot@users.noreply.github.com"
-          git add proxies/http_raw.txt proxies/http_tested.txt proxies/portal_ok.txt proxies/sample.txt proxies/sources.json proxies/stats.json
+          git add proxies/http_raw.txt proxies/http_tested.txt proxies/portal_ok.txt proxies/sample.txt proxies/sources.json proxies/stats.json subscribers.json
           git diff --cached --quiet && echo "no changes" && exit 0
           git commit -m "proxy refresh $(date -u +%F_%T)"
           git push
@@ -61,36 +62,4 @@ jobs:
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
-        run: |
-          if [ -z "$TG_BOT_TOKEN" ] || [ -z "$TG_CHAT_ID" ]; then
-            echo "telegram secrets not set, skipping notify"
-            exit 0
-          fi
-          MSG=$(python - <<'EOF'
-          import json, os
-          try:
-              s = json.load(open("proxies/stats.json"))
-              f = s.get("fetch", {})
-              per = f.get("per_source", {})
-              alive = sum(1 for v in per.values() if v > 0)
-              msg = (
-                  "🔄 <b>Proxy refresh done</b>\n"
-                  f"🕐 {s.get('timestamp')}\n"
-                  f"📡 Sources alive: {alive}/{len(per)}\n"
-                  f"📦 Unique fetched: {s.get('fetch', {}).get('unique', '?')}\n"
-                  f"🧪 Tested: {s.get('candidates')} → ✅ Working: <b>{s.get('working')}</b>\n"
-                  f"🎯 Portal OK: <b>{s.get('portal_ok')}</b>\n"
-                  f"⚡ Fastest: {s.get('fastest_latency_s')}s\n\n"
-              )
-              link = f"https://cdn.jsdelivr.net/gh/{os.environ['GITHUB_REPOSITORY']}@main/proxies/http_tested.txt"
-              msg += f'🔗 <a href="{link}">proxy list နှိပ်ဖွင့်</a>\n'
-              msg += f"⏳ Next update: ~{s.get('next_update', '?')} (every {s.get('refresh_hours', '?')}h)"
-          except Exception as e:
-              msg = f"⚠️ proxy refresh finished with errors: {e}"
-          print(msg)
-          EOF
-          )
-          curl -s -X POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" \
-            -d chat_id="$TG_CHAT_ID" \
-            -d parse_mode=HTML \
-            -d text="$MSG" -o /dev/null -w "telegram: %{http_code}\n"
+        run: python notify.py
