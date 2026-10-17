@@ -48,6 +48,14 @@ jobs:
           git commit -m "proxy refresh $(date -u +%F_%T)"
           git push
 
+      - name: Purge CDN cache
+        if: always()
+        run: |
+          for f in proxies/http_tested.txt proxies/portal_ok.txt proxies/stats.json proxies/http_raw.txt; do
+            curl -s --max-time 30 "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/$f" -o /dev/null
+          done
+          echo "jsdelivr cache purged"
+
       - name: Notify Telegram
         if: always()
         env:
