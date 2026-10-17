@@ -16,8 +16,11 @@ import json
 import os
 import sys
 import time
+from datetime import datetime, timedelta, timezone
 
 import aiohttp
+
+MMT = timezone(timedelta(hours=6, minutes=30))  # Myanmar time
 
 NEUTRAL_URL = "http://connectivitycheck.gstatic.com/generate_204"
 PORTAL_URL = "https://portal-as.ruijienetworks.com/api/auth/voucher/?lang=en_US"
@@ -32,9 +35,9 @@ REFRESH_HOURS = float(os.environ.get("REFRESH_HOURS", "2"))
 
 
 def _ts(epoch):
-    # colon-free UTC stamp: no "HH:MM" token may appear in the file, because
-    # proxy parsers would read it as a bogus http://HH:MM proxy.
-    return time.strftime("%Y-%m-%d %H%M UTC", time.gmtime(epoch))
+    # colon-free Myanmar-time stamp: no "HH:MM" token may appear in the file,
+    # because proxy parsers would read it as a bogus http://HH:MM proxy.
+    return datetime.fromtimestamp(epoch, MMT).strftime("%Y-%m-%d %H%M +0630")
 
 
 async def _test_list(proxies, url, concurrency, timeout):
@@ -102,7 +105,7 @@ def main():
             f.write("\n".join(portal_ok) + "\n")
 
     stats = {
-        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "timestamp": datetime.now(MMT).strftime("%Y-%m-%d %H:%M:%S +0630"),
         "next_update": _ts(time.time() + REFRESH_HOURS * 3600),
         "refresh_hours": REFRESH_HOURS,
         "candidates": len(candidates),
