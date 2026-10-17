@@ -23,7 +23,7 @@ VPS မလို — GitHub Actions အလကားသုံး။ ၂ နာရ
 
 | file | အကြောင်း |
 |---|---|
-| `http_tested.txt` | စစ်ပြီးသား၊ အမြန်ဆုံး အရင်စီ — **အဓိက သုံးမယ့် list**။ အပေါ်ဆုံး ၃ ကြောင်းမှာ `# last_update` / `# next_update` / `# working` ပါတယ် (colon မပါတဲ့ format — proxy parser တွေ အမှားမဖတ်မိအောင်) |
+| `http_tested.txt` | စစ်ပြီးသား၊ အမြန်ဆုံး အရင်စီ — **အဓိက သုံးမယ့် list**။ အပေါ်မှာ `# last_update` / `# next_update` / `# working` ပါတယ်။ ပြီးရင် **`# portal_ok`** section (portal ကို တကယ်ဖြေတဲ့ အကောင်းဆုံးတွေ အရင်), ပြီးမှ **`# tested_ok`** section။ Header/section ကြောင်းတွေက `#` နဲ့စ + colon မပါ — proxy parser တွေ အမှားမဖတ်မိအောင် စစ်ပြီးသား |
 | `portal_ok.txt` | Ruijie portal ကို ဖြေတဲ့ proxy တွေ (stage 2) |
 | `http_raw.txt` | မစစ်ရသေးတဲ့ unique အားလုံး |
 | `stats.json` | စာရင်း (source တစ်ခုချင်းစီ ရမရ, working အရေအတွက်...) |
