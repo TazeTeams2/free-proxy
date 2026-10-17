@@ -1,0 +1,44 @@
+# Free Proxy Fetcher (GitHub Actions)
+
+VPS မလို — GitHub Actions အလကားသုံး။ ၆ နာရီတစ်ခါ public proxy list 18 ခုကနေ
+ယူ → စစ် → repo ထဲ commit → Telegram ကို အကြောင်းကြား။
+
+## အသုံးပြုပုံ (၅ မိနစ်)
+
+1. **Repo အသစ်ဆောက်** — github.com → New repository → နာမည်ပေး (ဥပမာ `free-proxy`)
+   → Public → Create
+2. **ဒီ folder ထဲက file အားလုံး upload** — repo page → `Add file` → `Upload files`
+   → file/folder အားလုံး drag-drop (`.github` folder ရော ပါရမယ်)
+3. **Secrets ၂ ခု ထည့်** — repo `Settings` → `Secrets and variables` → `Actions`
+   → `New repository secret`:
+   - `TG_BOT_TOKEN` = BotFather က ရတဲ့ token
+   - `TG_CHAT_ID` = ကိုယ့် Telegram user ID ( [@userinfobot](https://t.me/userinfobot) ကနေ ယူ)
+4. **Actions ဖွင့်** — repo `Actions` tab → `proxy-refresh` → `Enable workflow`
+   → `Run workflow` နှိပ် စမ်း
+5. **List ယူသုံးရန်** —
+   `https://cdn.jsdelivr.net/gh/<user>/<repo>@main/proxies/http_tested.txt`
+   (jsdelivr CDN, အလကား, မြန်)
+
+## ထွက်တဲ့ file တွေ (`proxies/`)
+
+| file | အကြောင်း |
+|---|---|
+| `http_tested.txt` | စစ်ပြီးသား၊ အမြန်ဆုံး အရင်စီ — **အဓိက သုံးမယ့် list** |
+| `portal_ok.txt` | Ruijie portal ကို ဖြေတဲ့ proxy တွေ (stage 2) |
+| `http_raw.txt` | မစစ်ရသေးတဲ့ unique အားလုံး |
+| `stats.json` | စာရင်း (source တစ်ခုချင်းစီ ရမရ, working အရေအတွက်...) |
+
+## ပြင်လို့ရတာတွေ
+
+- `.github/workflows/proxy-refresh.yml` ထဲ `cron: "0 */6 * * *"` = ၆ နာရီတစ်ခါ
+  (ဥပမာ ၂ နာရီတစ်ခါ → `0 */2 * * *`)
+- `TEST_PORTAL: "1"` → `"0"` ဆို portal stage မစစ်ဘူး (ပိုမြန်)
+- `fetch_proxies.py` → `SAMPLE_PER_SOURCE` (default 1000/source)
+- `test_proxies.py` → `TEST_CONCURRENCY=250`, `TEST_TIMEOUT=8`
+
+## သတိပြုရန်
+
+- Run တိုင်း auto-commit ဖြစ်လို့ schedule က 60 ရက်ကြာလည်း မရပ်ဘူး
+- GitHub cron အချိန် မိနစ်ပိုင်း နောက်ကျနိုင်တယ်
+- Portal stage က GitHub IP (datacenter) ကနေ စစ်တာ — portal rate limit ထိရင်
+  working နည်းသွားနိုင်တယ်, ဒါကြောင့် neutral check (stage 1) က အဓိက
