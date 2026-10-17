@@ -14,9 +14,12 @@ import os
 import re
 import sys
 import time
+from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
 
 import aiohttp
+
+MMT = timezone(timedelta(hours=6, minutes=30))  # Myanmar time
 
 SOURCES = [
     ("MuRongPIG", "https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt", False),
@@ -176,7 +179,7 @@ def main():
             if take >= SAMPLE_PER_SOURCE:
                 break
 
-    ts = time.strftime("%Y-%m-%d %H:%M:%S")
+    ts = datetime.now(MMT).strftime("%Y-%m-%d %H:%M:%S +0630")
     with open(os.path.join(out_dir, "http_raw.txt"), "w") as f:
         f.write("\n".join(sorted(unique)) + "\n")
     with open(os.path.join(out_dir, "sample.txt"), "w") as f:
