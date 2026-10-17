@@ -40,7 +40,10 @@ VPS မလို — GitHub Actions အလကားသုံး။ ၂ နာရ
 - Run တိုင်း noti ကို owner + expiry မကျော်သေးသူတွေဆီ ပို့တယ်
 - Expiry ကျော်ရင် auto-ဖြုတ်ပြီး commit တယ်
 - **အရေးကြီး**: လူက bot ကို အရင် `/start` နှိပ်ထားရမယ် — မနှိပ်ထားရင် Telegram က message ပို့ခွင့်မပြုဘူး
-- ထည့်ချင်ရင်: chat ID (@userinfobot ကနေ ယူ) + ရက် ပြော — Muse က repo ထဲ ထည့်ပေးမယ် (သို့) github.com မှာ file ကို ကိုယ်တိုင် edit
+- ထည့်ချင်ရင် **ကိုယ်တိုင်** — repo `Actions` tab → `add-subscriber` → `Run workflow`
+  → chat ID + ရက် + note ဖြည့် → Run. ဒါပဲ (30 စက္ကန့်, ဖုန်းနဲ့ရ)
+  - days = `0` ဆို ဖြုတ်တာ
+- ဒါမှမဟုတ် ငါ့ကိုပြော — "123456789 ကို 7 ရက် ထည့်" — ငါထည့်ပေးမယ်
 
 ## ပြင်လို့ရတာတွေ
 
