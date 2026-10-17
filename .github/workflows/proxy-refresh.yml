@@ -6,7 +6,7 @@ name: proxy-refresh
 
 on:
   schedule:
-    - cron: "0 */3 * * *"
+    - cron: "0 */2 * * *"
   workflow_dispatch:
 
 permissions:
@@ -37,6 +37,7 @@ jobs:
         run: python test_proxies.py proxies
         env:
           TEST_PORTAL: "1"
+          REFRESH_HOURS: "2"
 
       - name: Commit results
         run: |
@@ -74,7 +75,8 @@ jobs:
                   f"⚡ Fastest: {s.get('fastest_latency_s')}s\n\n"
               )
               link = f"https://cdn.jsdelivr.net/gh/{os.environ['GITHUB_REPOSITORY']}@main/proxies/http_tested.txt"
-              msg += f'🔗 <a href="{link}">proxy list နှိပ်ဖွင့်</a>'
+              msg += f'🔗 <a href="{link}">proxy list နှိပ်ဖွင့်</a>\n'
+              msg += f"⏳ Next update: ~{s.get('next_update', '?')} (every {s.get('refresh_hours', '?')}h)"
           except Exception as e:
               msg = f"⚠️ proxy refresh finished with errors: {e}"
           print(msg)
