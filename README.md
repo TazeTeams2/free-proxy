@@ -28,6 +28,20 @@ VPS မလို — GitHub Actions အလကားသုံး။ ၂ နာရ
 | `http_raw.txt` | မစစ်ရသေးတဲ့ unique အားလုံး |
 | `stats.json` | စာရင်း (source တစ်ခုချင်းစီ ရမရ, working အရေအတွက်...) |
 
+## သူများကို ရက်အကန့်အသတ်နဲ့ ထည့်တာ (subscribers)
+
+`subscribers.json` — chat_id နဲ့ expiry date:
+```json
+{
+  "123456789": {"expiry": "2026-10-24", "note": "Mg Mg"},
+  "987654321": {"expiry": "2026-11-17", "note": ""}
+}
+```
+- Run တိုင်း noti ကို owner + expiry မကျော်သေးသူတွေဆီ ပို့တယ်
+- Expiry ကျော်ရင် auto-ဖြုတ်ပြီး commit တယ်
+- **အရေးကြီး**: လူက bot ကို အရင် `/start` နှိပ်ထားရမယ် — မနှိပ်ထားရင် Telegram က message ပို့ခွင့်မပြုဘူး
+- ထည့်ချင်ရင်: chat ID (@userinfobot ကနေ ယူ) + ရက် ပြော — Muse က repo ထဲ ထည့်ပေးမယ် (သို့) github.com မှာ file ကို ကိုယ်တိုင် edit
+
 ## ပြင်လို့ရတာတွေ
 
 - `.github/workflows/proxy-refresh.yml` ထဲ `cron: "0 */2 * * *"` = ၂ နာရီတစ်ခါ
