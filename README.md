@@ -1,6 +1,6 @@
 # Free Proxy Fetcher (GitHub Actions)
 
-VPS မလို — GitHub Actions အလကားသုံး။ ၃ နာရီတစ်ခါ public proxy list 18 ခုကနေ
+VPS မလို — GitHub Actions အလကားသုံး။ ၂ နာရီတစ်ခါ public proxy list 18 ခုကနေ
 ယူ → စစ် → repo ထဲ commit → Telegram ကို အကြောင်းကြား။
 
 ## အသုံးပြုပုံ (၅ မိနစ်)
@@ -23,16 +23,18 @@ VPS မလို — GitHub Actions အလကားသုံး။ ၃ နာရ
 
 | file | အကြောင်း |
 |---|---|
-| `http_tested.txt` | စစ်ပြီးသား၊ အမြန်ဆုံး အရင်စီ — **အဓိက သုံးမယ့် list** |
+| `http_tested.txt` | စစ်ပြီးသား၊ အမြန်ဆုံး အရင်စီ — **အဓိက သုံးမယ့် list**။ အပေါ်ဆုံး ၃ ကြောင်းမှာ `# last_update` / `# next_update` / `# working` ပါတယ် (colon မပါတဲ့ format — proxy parser တွေ အမှားမဖတ်မိအောင်) |
 | `portal_ok.txt` | Ruijie portal ကို ဖြေတဲ့ proxy တွေ (stage 2) |
 | `http_raw.txt` | မစစ်ရသေးတဲ့ unique အားလုံး |
 | `stats.json` | စာရင်း (source တစ်ခုချင်းစီ ရမရ, working အရေအတွက်...) |
 
 ## ပြင်လို့ရတာတွေ
 
-- `.github/workflows/proxy-refresh.yml` ထဲ `cron: "0 */3 * * *"` = ၃ နာရီတစ်ခါ
-  (ဥပမာ ၂ နာရီတစ်ခါ → `0 */2 * * *`)
+- `.github/workflows/proxy-refresh.yml` ထဲ `cron: "0 */2 * * *"` = ၂ နာရီတစ်ခါ
+  (ဥပမာ ၃ နာရီတစ်ခါ → `0 */3 * * *`)
 - `TEST_PORTAL: "1"` → `"0"` ဆို portal stage မစစ်ဘူး (ပိုမြန်)
+- `REFRESH_HOURS` env နဲ့ cron interval အတူတူထားရ — `http_tested.txt` ထဲက
+  `# next_update` line အတွက် သုံးတယ်
 - `fetch_proxies.py` → `SAMPLE_PER_SOURCE` (default 1000/source)
 - `test_proxies.py` → `TEST_CONCURRENCY=250`, `TEST_TIMEOUT=8`
 
