@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-10-17 03:51:22",
+  "candidates": 8782,
+  "working": 2141,
+  "portal_ok": 15,
+  "stage1_seconds": 253.6,
+  "stage2_seconds": 5.8,
+  "fastest_latency_s": 0.009,
+  "fetch": {
+    "timestamp": "2026-10-17 03:47:02",
+    "per_source": {
+      "MuRongPIG": 101620,
+      "proxyscrape-v2": 744,
+      "zloiuser": 137,
+      "prxchk": 58,
+      "sunny9577": 1778,
+      "proxy4parsing": 0,
+      "proxifly-http": 4939,
+      "proxifly-all": 5636,
+      "thespeedx": 2710,
+      "jetkai": 1801,
+      "mmpx12": 440,
+      "clarketm": 400,
+      "vakhov": 528,
+      "monosans": 408,
+      "proxyscrape": 464,
+      "roosterkid": 92,
+      "shiftytr": 823,
+      "geonode": 500
+    },
+    "unique": 109143,
+    "sample": 8782
+  }
+}
