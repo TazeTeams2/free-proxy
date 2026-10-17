@@ -1,0 +1,42 @@
+name: add-subscriber
+
+# Owner self-service: add someone to the proxy notifications with a day
+# limit, straight from the Actions tab on a phone. No server needed.
+# Only repo collaborators can trigger this (public visitors cannot).
+
+on:
+  workflow_dispatch:
+    inputs:
+      chat_id:
+        description: "Telegram chat ID (get it from @userinfobot)"
+        required: true
+      days:
+        description: "Days of access (0 = remove)"
+        required: true
+        default: "7"
+      note:
+        description: "Note, e.g. the person's name (optional)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add subscriber
+        run: python add_subscriber.py "${{ inputs.chat_id }}" "${{ inputs.days }}" "${{ inputs.note }}"
+
+      - name: Commit
+        run: |
+          git config user.name "proxy-bot"
+          git config user.email "proxy-bot@users.noreply.github.com"
+          git add subscribers.json
+          git diff --cached --quiet && echo "no changes" && exit 0
+          git commit -m "subscriber update (${{ inputs.days }}d)"
+          git push
