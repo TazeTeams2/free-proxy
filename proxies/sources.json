@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-17 03:47:02",
+  "timestamp": "2026-10-17 03:52:18",
   "per_source": {
     "MuRongPIG": 101620,
-    "proxyscrape-v2": 744,
+    "proxyscrape-v2": 687,
     "zloiuser": 137,
     "prxchk": 58,
     "sunny9577": 1778,
@@ -15,11 +15,11 @@
     "clarketm": 400,
     "vakhov": 528,
     "monosans": 408,
-    "proxyscrape": 464,
+    "proxyscrape": 626,
     "roosterkid": 92,
     "shiftytr": 823,
     "geonode": 500
   },
-  "unique": 109143,
-  "sample": 8782
+  "unique": 109197,
+  "sample": 8925
 }
