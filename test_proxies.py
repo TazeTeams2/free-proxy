@@ -28,6 +28,13 @@ PORTAL_SAMPLE = int(os.environ.get("PORTAL_SAMPLE", "200"))
 PORTAL_CONCURRENCY = int(os.environ.get("PORTAL_CONCURRENCY", "50"))
 PORTAL_TIMEOUT = int(os.environ.get("PORTAL_TIMEOUT", "10"))
 TEST_PORTAL = os.environ.get("TEST_PORTAL", "1") == "1"
+REFRESH_HOURS = float(os.environ.get("REFRESH_HOURS", "2"))
+
+
+def _ts(epoch):
+    # colon-free UTC stamp: no "HH:MM" token may appear in the file, because
+    # proxy parsers would read it as a bogus http://HH:MM proxy.
+    return time.strftime("%Y-%m-%d %H%M UTC", time.gmtime(epoch))
 
 
 async def _test_list(proxies, url, concurrency, timeout):
@@ -74,6 +81,12 @@ def main():
     print(f"[test] stage1 working: {len(working)} in {t1 - t0:.1f}s", flush=True)
 
     with open(os.path.join(out_dir, "http_tested.txt"), "w") as f:
+        now = time.time()
+        last_update = _ts(now)
+        next_update = _ts(now + REFRESH_HOURS * 3600)
+        f.write(f"# last_update {last_update}\n")
+        f.write(f"# next_update ~{next_update} every {REFRESH_HOURS:g}h\n")
+        f.write(f"# working {len(working)}\n")
         f.write("\n".join(p for p, _ in working) + "\n")
 
     portal_ok, t2 = [], t1
@@ -90,6 +103,8 @@ def main():
 
     stats = {
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "next_update": _ts(time.time() + REFRESH_HOURS * 3600),
+        "refresh_hours": REFRESH_HOURS,
         "candidates": len(candidates),
         "working": len(working),
         "portal_ok": len(portal_ok),
