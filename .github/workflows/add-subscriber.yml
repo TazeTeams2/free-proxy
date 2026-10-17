@@ -22,6 +22,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: subscriber-update
+  cancel-in-progress: false
+
 jobs:
   add:
     runs-on: ubuntu-latest
