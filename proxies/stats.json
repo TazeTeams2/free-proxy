@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-10-25 20:48:10 +0630",
-  "next_update": "2026-10-25 2248 +0630",
+  "timestamp": "2026-10-25 22:48:33 +0630",
+  "next_update": "2026-10-26 0048 +0630",
   "refresh_hours": 2.0,
-  "candidates": 8557,
-  "working": 2176,
-  "portal_ok": 19,
-  "stage1_seconds": 244.2,
-  "stage2_seconds": 11.0,
-  "fastest_latency_s": 0.018,
+  "candidates": 8628,
+  "working": 2311,
+  "portal_ok": 22,
+  "stage1_seconds": 243.6,
+  "stage2_seconds": 1.7,
+  "fastest_latency_s": 0.022,
   "fetch": {
-    "timestamp": "2026-10-25 20:43:55 +0630",
+    "timestamp": "2026-10-25 22:44:27 +0630",
     "per_source": {
       "MuRongPIG": 101620,
-      "proxyscrape-v2": 383,
-      "zloiuser": 165,
+      "proxyscrape-v2": 769,
+      "zloiuser": 78,
       "prxchk": 58,
-      "sunny9577": 1732,
+      "sunny9577": 1390,
       "proxy4parsing": 0,
       "proxifly-http": 5551,
       "proxifly-all": 7142,
@@ -24,13 +24,13 @@
       "mmpx12": 440,
       "clarketm": 400,
       "vakhov": 528,
-      "monosans": 261,
-      "proxyscrape": 469,
-      "roosterkid": 128,
+      "monosans": 327,
+      "proxyscrape": 298,
+      "roosterkid": 111,
       "shiftytr": 823,
       "geonode": 500
     },
-    "unique": 109692,
-    "sample": 8557
+    "unique": 109830,
+    "sample": 8628
   }
 }
