@@ -1,19 +1,19 @@
 {
-  "timestamp": "2026-10-27 18:59:28 +0630",
-  "next_update": "2026-10-27 2059 +0630",
+  "timestamp": "2026-10-27 21:10:37 +0630",
+  "next_update": "2026-10-27 2310 +0630",
   "refresh_hours": 2.0,
-  "candidates": 9278,
-  "working": 2143,
-  "portal_ok": 11,
-  "stage1_seconds": 275.7,
-  "stage2_seconds": 11.0,
-  "fastest_latency_s": 0.011,
+  "candidates": 8972,
+  "working": 2258,
+  "portal_ok": 7,
+  "stage1_seconds": 261.7,
+  "stage2_seconds": 10.4,
+  "fastest_latency_s": 0.026,
   "fetch": {
-    "timestamp": "2026-10-27 18:54:41 +0630",
+    "timestamp": "2026-10-27 21:06:05 +0630",
     "per_source": {
       "MuRongPIG": 101620,
-      "proxyscrape-v2": 1062,
-      "zloiuser": 197,
+      "proxyscrape-v2": 762,
+      "zloiuser": 182,
       "prxchk": 58,
       "sunny9577": 1699,
       "proxy4parsing": 0,
@@ -24,13 +24,13 @@
       "mmpx12": 440,
       "clarketm": 400,
       "vakhov": 528,
-      "monosans": 411,
-      "proxyscrape": 703,
-      "roosterkid": 105,
+      "monosans": 390,
+      "proxyscrape": 487,
+      "roosterkid": 104,
       "shiftytr": 823,
       "geonode": 500
     },
-    "unique": 108483,
-    "sample": 9278
+    "unique": 108474,
+    "sample": 8972
   }
 }
