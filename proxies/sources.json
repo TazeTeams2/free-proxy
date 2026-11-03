@@ -1,25 +1,25 @@
 {
-  "timestamp": "2026-11-03 23:09:41 +0630",
+  "timestamp": "2026-11-04 01:02:17 +0630",
   "per_source": {
     "MuRongPIG": 101620,
-    "proxyscrape-v2": 1119,
-    "zloiuser": 216,
+    "proxyscrape-v2": 1073,
+    "zloiuser": 133,
     "prxchk": 58,
-    "sunny9577": 2144,
+    "sunny9577": 2147,
     "proxy4parsing": 0,
-    "proxifly-http": 5251,
-    "proxifly-all": 6171,
+    "proxifly-http": 5099,
+    "proxifly-all": 6003,
     "thespeedx": 2896,
     "jetkai": 1801,
     "mmpx12": 440,
     "clarketm": 400,
     "vakhov": 528,
-    "monosans": 958,
-    "proxyscrape": 786,
+    "monosans": 1165,
+    "proxyscrape": 708,
     "roosterkid": 150,
     "shiftytr": 823,
     "geonode": 500
   },
-  "unique": 109419,
-  "sample": 9719
+  "unique": 109285,
+  "sample": 9552
 }
