@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-11 13:20:03 +0630",
+  "timestamp": "2026-11-11 15:13:47 +0630",
   "per_source": {
     "MuRongPIG": 101620,
-    "proxyscrape-v2": 774,
-    "zloiuser": 192,
+    "proxyscrape-v2": 1462,
+    "zloiuser": 233,
     "prxchk": 58,
     "sunny9577": 2014,
     "proxy4parsing": 0,
@@ -14,12 +14,12 @@
     "mmpx12": 440,
     "clarketm": 400,
     "vakhov": 528,
-    "monosans": 758,
-    "proxyscrape": 584,
-    "roosterkid": 107,
+    "monosans": 1266,
+    "proxyscrape": 938,
+    "roosterkid": 143,
     "shiftytr": 823,
     "geonode": 500
   },
-  "unique": 108269,
-  "sample": 9238
+  "unique": 108723,
+  "sample": 9852
 }
